@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@pages/*": ["src/pages/*"]
+    },
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "lib": ["es2015", "dom", "es2015.promise"] //编译过程中需要引入的库文件的列表
+  },
+  "include": [
+    "src/**/*" //编译包含在  src及其子目录下的所有匹配的文件
+  ],
+
+  "exclude": ["node_modules", "dist"]
+}
