@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-07 11:39:49
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-07 14:12:07
+ * @LastEditTime: 2020-08-07 21:48:27
  */
 const path = require('path')
 const { srcPath } = require('./path')
@@ -13,6 +13,10 @@ module.exports = {
   entry: path.join(srcPath, 'index.ts'),
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
       {
         test: /\.tsx?$/,
         use: [
