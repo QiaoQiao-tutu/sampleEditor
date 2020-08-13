@@ -4,8 +4,9 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-07 11:35:13
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-07 14:07:38
+ * @LastEditTime: 2020-08-13 17:59:52
  */
+const path = require('path')
 const webpack = require('webpack')
 const webpackCommonConf = require('./webpack.common')
 const { distPath } = require('./path')
@@ -13,7 +14,25 @@ const { merge } = require('webpack-merge')
 module.exports = merge(webpackCommonConf, {
   mode: 'development',
   module: {
-    rules: [],
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        exclude: path.resolve(__dirname, 'src/component'),
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+        include: path.resolve(__dirname, 'src/component'),
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({

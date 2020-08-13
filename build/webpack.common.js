@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-07 11:39:49
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-13 16:24:19
+ * @LastEditTime: 2020-08-13 17:01:43
  */
 const path = require('path')
 const { srcPath } = require('./path')
@@ -16,23 +16,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
-        exclude: path.resolve(__dirname, 'src/component'),
-      },
-      {
-        test: /\.css$/i,
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-            },
-          },
-        ],
-        include: path.resolve(__dirname, 'src/component'),
-      },
       {
         test: /\.tsx?$/,
         use: [
