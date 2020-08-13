@@ -1,0 +1,40 @@
+.editor-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid #f7f7f7;
+}
+.editor-toolbar-header {
+  list-style: none;
+  width: 900px;
+  margin: 0 auto;
+  padding: 5px 0 0 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+.editor-toolbar-header > li {
+  float: left;
+  width: 45px;
+  height: 40px;
+  margin-right: 10px;
+}
+.editor-toolbar-header-item {
+  border: none;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: #fff;
+  outline: none;
+  overflow: hidden;
+}
+.editor-toolbar-header-item:hover {
+  background-color: #ffffe0;
+}
+.editor-color {
+  width: 80%;
+  height: 80%;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}

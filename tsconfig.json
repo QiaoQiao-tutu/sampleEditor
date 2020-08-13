@@ -1,21 +1,23 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@pages/*": ["src/pages/*"]
-    },
-    "module": "commonjs",
-    "target": "es5",
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
+    "target": "ES5",
+    "module": "ES6",
+    "noImplicitThis": false,
+    "noImplicitAny": false,
+    "strict": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
     "esModuleInterop": true,
-    "allowJs": true,
-    "lib": ["es2015", "dom", "es2015.promise"] //编译过程中需要引入的库文件的列表
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    // "types": ["webpack-env"],
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "include": [
-    "src/**/*" //编译包含在  src及其子目录下的所有匹配的文件
-  ],
-
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
