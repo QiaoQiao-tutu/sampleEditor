@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-13 13:54:43
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-13 14:27:15
+ * @LastEditTime: 2020-08-14 09:45:14
  */
 /**
  * @description: 通过绑定事件函数
@@ -29,9 +29,11 @@ export const bindEvent = (
   element.addEventListener(type, (event) => {
     const target = event.target
     if (selector) {
-      callback ? callback.call(target, event) : ''
+      if (!callback) return
+      callback.call(target, event)
     } else {
-      callback ? callback.call(target, event) : ''
+      if (!callback) return
+      callback.call(target, event)
     }
   })
 }

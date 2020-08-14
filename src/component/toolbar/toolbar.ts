@@ -4,18 +4,17 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-13 14:36:38
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-13 16:26:46
+ * @LastEditTime: 2020-08-14 10:46:40
  */
 import styles from './toolbar.module.css'
 import { bindEvent } from '../../utils/common'
-
 import { Icomponent } from '../../utils/component'
 interface Itoolbar {
   width?: string
   height?: string
   content?: (content: HTMLElement) => void
 }
-function toolbar(options) {
+function toolbar(options: Itoolbar) {
   return new Toolbar(options)
 }
 class Toolbar implements Icomponent {
@@ -83,7 +82,7 @@ class Toolbar implements Icomponent {
   }
   colorEvent() {
     const colorElem = document.getElementById('setColorIpt') as Element
-    bindEvent(colorElem, 'change', (e: InputEvent) => {
+    bindEvent(colorElem, 'change', () => {
       const { value } = document.querySelector(
         '#setColorIpt'
       ) as HTMLInputElement
@@ -133,7 +132,8 @@ class Toolbar implements Icomponent {
     let toolbarElem = this.tempContainer.querySelector(
       `.${styles['editor-toolbar']}`
     )
-    this.settings.content ? this.settings.content(toolbarElem) : ''
+    if (!this.settings.content) return
+    this.settings.content(toolbarElem)
   }
 }
 

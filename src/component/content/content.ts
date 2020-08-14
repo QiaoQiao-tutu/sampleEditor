@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-13 15:22:36
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-13 16:23:58
+ * @LastEditTime: 2020-08-14 10:46:20
  */
 import styles from './content.module.css'
 import { Icomponent } from '../../utils/component'
@@ -16,7 +16,7 @@ interface Icontent {
   maxlength?: number
   content?: (content: HTMLElement) => void
 }
-function content(options) {
+function content(options: Icontent) {
   return new Content(options)
 }
 class Content implements Icomponent {
@@ -60,7 +60,8 @@ class Content implements Icomponent {
   handle() {}
   contentCallback() {
     let contentElem = this.tempContainer.querySelector(`.${styles.main}`)
-    this.settings.content ? this.settings.content(contentElem) : ''
+    if (!this.settings.content) return
+    this.settings.content(contentElem)
   }
 }
 export default content
