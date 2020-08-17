@@ -4,8 +4,9 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-07 11:21:10
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-13 16:27:40
+ * @LastEditTime: 2020-08-17 17:50:41
  */
+import 'babel-polyfill'
 import './index.css'
 import toolbar from './component/toolbar/toolbar'
 import content from './component/content/content'
