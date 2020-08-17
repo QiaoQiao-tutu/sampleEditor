@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-13 15:22:36
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-17 17:37:31
+ * @LastEditTime: 2020-08-17 18:01:29
  */
 import styles from './content.module.css'
 import { Icomponent } from '../../utils/component'
@@ -20,6 +20,7 @@ interface Icontent {
 function content(options: Icontent) {
   return new Content(options)
 }
+
 class Content implements Icomponent {
   tempContainer
   constructor(private settings: Icontent) {
@@ -76,7 +77,7 @@ class Content implements Icomponent {
       let rangeInfo = getSelectObj()
       let win: any = window
       win.beforeRangeInfo = rangeInfo
-      console.log('编辑框失焦时获取的信息：', rangeInfo)
+      // console.log('编辑框失焦时获取的信息：', rangeInfo)
     })
   }
   contentCallback() {

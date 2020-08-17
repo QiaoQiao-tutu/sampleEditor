@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-13 13:54:43
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-17 17:55:01
+ * @LastEditTime: 2020-08-17 17:57:41
  */
 /**
  * @description: 通过绑定事件函数
@@ -59,7 +59,7 @@ export const getSelectObj = (): object => {
   }
 }
 /**
- * @description: 创建一个 Range 对象
+ * @description: 创建一个 Selection 对象
  * @param {null} null
  * @return {Selection} Selection
  * @author: WangQiaoLing

@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-13 14:36:38
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-17 17:54:15
+ * @LastEditTime: 2020-08-17 18:10:03
  */
 import styles from './toolbar.module.css'
 import { bindEvent, getSelectObj, createSelection } from '../../utils/common'
@@ -119,35 +119,13 @@ class Toolbar implements Icomponent {
       if (id === 'funcBtn') return
 
       const rangeObj = getSelectObj() as Range
-      // console.log('event selObj--', rangeObj)
-      let win: any = window
-      // console.log('全局：', win.beforeRangeInfo)
-
-      if (rangeObj['isSelected']) {
-        this.select_text = rangeObj['txt']
-      } else if (win.beforeRangeInfo['isSelected']) {
-        const { startOffset, endOffset } = win.beforeRangeInfo.rangeObj
-
-        const contentElem = document.getElementById('editContent') as Element
-        const textNode = contentElem.firstChild as Node
-        const selection = createSelection()
-        const rangeObj = new Range()
-        console.log(textNode)
-        rangeObj.setStart(textNode, startOffset)
-        rangeObj.setEnd(textNode, endOffset)
-        // 所有内容变为非选取状态
-        selection.removeAllRanges()
-        // 然后自动选取某个区域
-        selection.addRange(rangeObj)
-        this.select_text = selection.toString()
-      } else {
-        return
-      }
-      // console.log('最终获取select_text', this.select_text)
 
       switch (id) {
         case 'boldBtn':
           console.log('加粗')
+          this.select_text = rangeObj['isSelected']
+            ? rangeObj['txt']
+            : this.getBoldText()
           this.toExecCommandFunc('bold', false, this.select_text)
           break
         case 'setH1Btn':
@@ -157,6 +135,25 @@ class Toolbar implements Icomponent {
           break
       }
     })
+  }
+  getBoldText() {
+    let win: any = window
+    if (win.beforeRangeInfo['isSelected']) {
+      const { startOffset, endOffset } = win.beforeRangeInfo.rangeObj
+
+      const contentElem = document.getElementById('editContent') as Element
+      const textNode = contentElem.firstChild as Node
+      const selection = createSelection()
+      const rangeObj = new Range()
+      console.log(textNode)
+      rangeObj.setStart(textNode, startOffset)
+      rangeObj.setEnd(textNode, endOffset)
+      // 所有内容变为非选取状态
+      selection.removeAllRanges()
+      // 然后自动选取某个区域
+      selection.addRange(rangeObj)
+      return selection.toString()
+    }
   }
   toExecCommandFunc(commod: string, flag: boolean, value: string) {
     try {
