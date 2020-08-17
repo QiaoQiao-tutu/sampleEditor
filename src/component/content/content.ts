@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-13 15:22:36
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-17 18:01:29
+ * @LastEditTime: 2020-08-17 20:00:27
  */
 import styles from './content.module.css'
 import { Icomponent } from '../../utils/component'
@@ -59,16 +59,7 @@ class Content implements Icomponent {
     `
     containerElem.appendChild(this.tempContainer)
   }
-  mouseupEvent() {
-    const editContentElem = document.getElementById(
-      'editContent'
-    ) as HTMLElement
-    // editContentElem.addEventListener('mouseup', () => {
-    //   console.log('editContentElem mouseup')
-    // })
-  }
   handle() {
-    // this.mouseupEvent()
     this.onblurEvent()
   }
   onblurEvent() {
@@ -85,11 +76,7 @@ class Content implements Icomponent {
       `.${styles.main}`
     ) as HTMLElement
     if (!this.settings.content) return
-    const ctxObj = {
-      contentElem,
-      // isBlur: this.isBlur,
-    }
-    this.settings.content(ctxObj)
+    this.settings.content({ contentElem })
   }
 }
 export default content

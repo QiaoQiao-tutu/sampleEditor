@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-13 14:36:38
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-17 18:10:03
+ * @LastEditTime: 2020-08-17 20:50:27
  */
 import styles from './toolbar.module.css'
 import { bindEvent, getSelectObj, createSelection } from '../../utils/common'
@@ -12,7 +12,7 @@ import { Icomponent } from '../../utils/component'
 interface Itoolbar {
   width?: string
   height?: string
-  content?: (content: HTMLElement) => void
+  content?: (content: Object) => void
 }
 function toolbar(options: Itoolbar) {
   return new Toolbar(options)
@@ -23,7 +23,6 @@ class Toolbar implements Icomponent {
   select_text
   header_type
   select_color
-  startContainer
   constructor(private settings: Itoolbar) {
     this.settings = Object.assign(
       {
@@ -41,7 +40,6 @@ class Toolbar implements Icomponent {
     this.select_text = ''
     this.header_type = '<h1>'
     this.select_color = 'red'
-    this.removeStorage()
     this.template()
     this.contentCallback()
     this.handle()
@@ -75,21 +73,7 @@ class Toolbar implements Icomponent {
     `
     containerElem.appendChild(this.tempContainer)
   }
-  removeStorage(): void {
-    // let text = localStorage.getItem('text')
-    if (localStorage.getItem('text')) {
-      localStorage.removeItem('text')
-    }
-    if (localStorage.getItem('start')) {
-      localStorage.removeItem('start')
-    }
-    if (localStorage.getItem('end')) {
-      localStorage.removeItem('end')
-    }
-  }
   handle() {
-    // 注册鼠标事件
-    // this.mouseupEvent()
     // 注册功能栏各个事件
     this.funcBtnEvent()
     // 颜色事件
@@ -107,11 +91,6 @@ class Toolbar implements Icomponent {
       this.toExecCommandFunc('foreColor', false, this.select_color)
     })
   }
-  mouseupEvent() {
-    window.addEventListener('mouseup', (e) => {
-      console.log('mouseup')
-    })
-  }
   funcBtnEvent() {
     const btnElem = document.getElementById('funcBtn') as Element
     bindEvent(btnElem, 'click', 'button', (e: Event) => {
@@ -122,7 +101,6 @@ class Toolbar implements Icomponent {
 
       switch (id) {
         case 'boldBtn':
-          console.log('加粗')
           this.select_text = rangeObj['isSelected']
             ? rangeObj['txt']
             : this.getBoldText()
@@ -137,23 +115,23 @@ class Toolbar implements Icomponent {
     })
   }
   getBoldText() {
-    let win: any = window
-    if (win.beforeRangeInfo['isSelected']) {
-      const { startOffset, endOffset } = win.beforeRangeInfo.rangeObj
+    const win: any = window
+    const { startOffset, endOffset } = win.beforeRangeInfo.rangeObj
 
-      const contentElem = document.getElementById('editContent') as Element
-      const textNode = contentElem.firstChild as Node
-      const selection = createSelection()
-      const rangeObj = new Range()
-      console.log(textNode)
-      rangeObj.setStart(textNode, startOffset)
-      rangeObj.setEnd(textNode, endOffset)
-      // 所有内容变为非选取状态
-      selection.removeAllRanges()
-      // 然后自动选取某个区域
-      selection.addRange(rangeObj)
-      return selection.toString()
-    }
+    const contentElem = document.getElementById('editContent') as Element
+    const textNode = contentElem.firstChild as Node
+    const selection: Selection = createSelection()
+    const rangeObj: Range = new Range()
+    // console.log(textNode)
+    rangeObj.setStart(textNode, startOffset)
+    rangeObj.setEnd(textNode, endOffset)
+    // 所有内容变为非选取状态
+    selection.removeAllRanges()
+    // 然后自动选取某个区域
+    selection.addRange(rangeObj)
+    // console.log('selection.toString()', selection.toString())
+
+    return selection.toString()
   }
   toExecCommandFunc(commod: string, flag: boolean, value: string) {
     try {
@@ -168,7 +146,7 @@ class Toolbar implements Icomponent {
       `.${styles['editor-toolbar']}`
     )
     if (!this.settings.content) return
-    this.settings.content(toolbarElem)
+    this.settings.content({ toolbarElem })
   }
 }
 

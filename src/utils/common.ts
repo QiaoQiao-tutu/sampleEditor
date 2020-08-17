@@ -4,7 +4,7 @@
  * @Autor: WangQiaoLing
  * @Date: 2020-08-13 13:54:43
  * @LastEditors: WangQiaoLing
- * @LastEditTime: 2020-08-17 17:57:41
+ * @LastEditTime: 2020-08-17 20:46:59
  */
 /**
  * @description: 通过绑定事件函数
@@ -40,19 +40,17 @@ export const bindEvent = (
 
 /**
  * @description: 获取鼠标选中文字
- * @param {type}
+ * @param {null}
  * @return {Object}
  * @author: WangQiaoLing
  */
 export const getSelectObj = (): object => {
-  const selObj = createSelection()
+  const selObj: Selection = createSelection()
 
-  // 获取 range 对象
   const rangeObj = selObj.getRangeAt(0) // range 被赋予一个 Range 对象
   const { collapsed } = rangeObj
 
   return {
-    // selObj,
     rangeObj,
     isSelected: collapsed ? false : true,
     txt: selObj.toString(),
